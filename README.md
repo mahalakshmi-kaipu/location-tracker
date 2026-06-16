@@ -2,6 +2,9 @@
 
 A professional Flutter application that continuously tracks and records the device's GPS location every 60 seconds, even in the background and after app force-kills. The project features deep native platform integration to display real-time battery percentage without using third-party battery packages.
 
+## 📺 Project Demo
+You can view the project demonstration video here: [Watch Demo Video](https://goldenfuture1-my.sharepoint.com/:v:/g/personal/mahalakshmi_kaipu_gftglobal_com_au/IQBdaYCXKx9cT50bk8U5yceqAXNYRT5LVAL-Se-fkH5mR2Q?e=rSbOUp)
+
 ## 🚀 Features
 
 ### 📍 Location Tracking
@@ -15,6 +18,30 @@ A professional Flutter application that continuously tracks and records the devi
 - **Platform Channels**: Implemented using native **Kotlin** (Android) and **Swift** (iOS).
 - **Zero Dependencies**: Strictly adheres to the requirement of not using external battery libraries.
 - **Periodic Updates**: The battery percentage on the home screen updates every minute.
+
+---
+
+## 🏗️ Architecture
+The project follows a clean, modular **GetX Architecture**:
+
+### 1. The Core Layers
+*   **Presentation Layer (Modules)**:
+    *   `Views`: (e.g., `home_view.dart`) Pure UI code that reacts to state changes.
+    *   `Controllers`: (`home_controller.dart`) Handles business logic, manages state via `.obs`, and interacts with repositories.
+    *   `Bindings`: (`home_binding.dart`) Manages dependency injection.
+*   **Data Layer**:
+    *   `Models`: (`location_model.dart`) Defines data structures with JSON serialization.
+    *   `Providers`: (`local_storage_provider.dart`) Low-level SQLite database operations.
+    *   `Repositories`: (`location_repository.dart`) Acts as an abstraction layer between Controllers and Providers.
+*   **Common Layer**: Shared styles, utils, and global widgets.
+
+### 2. State Management & Reactivity
+*   **Observables**: Uses Rx variables (e.g., `RxList`, `RxBool`) to hold state.
+*   **UI Updates**: Uses `Obx(() => ...)` to automatically rebuild widgets when data changes.
+
+### 3. Navigation & Dependency Injection
+*   **Named Routing**: Routes are centrally managed in `app_pages.dart`.
+*   **Dependency Injection**: Uses `Get.lazyPut` to ensure memory efficiency and decoupled logic.
 
 ---
 
